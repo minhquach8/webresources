@@ -1,0 +1,908 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"/><title>JavaScript</title><style>
+/* cspell:disable-file */
+/* webkit printing magic: print all background colors */
+html {
+	-webkit-print-color-adjust: exact;
+}
+* {
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact;
+}
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+}
+@media only screen {
+	body {
+		margin: 2em auto;
+		max-width: 900px;
+		color: rgb(55, 53, 47);
+	}
+}
+
+body {
+	line-height: 1.5;
+	white-space: pre-wrap;
+}
+
+a,
+a.visited {
+	color: inherit;
+	text-decoration: underline;
+}
+
+.pdf-relative-link-path {
+	font-size: 80%;
+	color: #444;
+}
+
+h1,
+h2,
+h3 {
+	letter-spacing: -0.01em;
+	line-height: 1.2;
+	font-weight: 600;
+	margin-bottom: 0;
+}
+
+.page-title {
+	font-size: 2.5rem;
+	font-weight: 700;
+	margin-top: 0;
+	margin-bottom: 0.75em;
+}
+
+h1 {
+	font-size: 1.875rem;
+	margin-top: 1.875rem;
+}
+
+h2 {
+	font-size: 1.5rem;
+	margin-top: 1.5rem;
+}
+
+h3 {
+	font-size: 1.25rem;
+	margin-top: 1.25rem;
+}
+
+.source {
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	padding: 1.5em;
+	word-break: break-all;
+}
+
+.callout {
+	border-radius: 3px;
+	padding: 1rem;
+}
+
+figure {
+	margin: 1.25em 0;
+	page-break-inside: avoid;
+}
+
+figcaption {
+	opacity: 0.5;
+	font-size: 85%;
+	margin-top: 0.5em;
+}
+
+mark {
+	background-color: transparent;
+}
+
+.indented {
+	padding-left: 1.5em;
+}
+
+hr {
+	background: transparent;
+	display: block;
+	width: 100%;
+	height: 1px;
+	visibility: visible;
+	border: none;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.09);
+}
+
+img {
+	max-width: 100%;
+}
+
+@media only print {
+	img {
+		max-height: 100vh;
+		object-fit: contain;
+	}
+}
+
+@page {
+	margin: 1in;
+}
+
+.collection-content {
+	font-size: 0.875rem;
+}
+
+.column-list {
+	display: flex;
+	justify-content: space-between;
+}
+
+.column {
+	padding: 0 1em;
+}
+
+.column:first-child {
+	padding-left: 0;
+}
+
+.column:last-child {
+	padding-right: 0;
+}
+
+.table_of_contents-item {
+	display: block;
+	font-size: 0.875rem;
+	line-height: 1.3;
+	padding: 0.125rem;
+}
+
+.table_of_contents-indent-1 {
+	margin-left: 1.5rem;
+}
+
+.table_of_contents-indent-2 {
+	margin-left: 3rem;
+}
+
+.table_of_contents-indent-3 {
+	margin-left: 4.5rem;
+}
+
+.table_of_contents-link {
+	text-decoration: none;
+	opacity: 0.7;
+	border-bottom: 1px solid rgba(55, 53, 47, 0.18);
+}
+
+table,
+th,
+td {
+	border: 1px solid rgba(55, 53, 47, 0.09);
+	border-collapse: collapse;
+}
+
+table {
+	border-left: none;
+	border-right: none;
+}
+
+th,
+td {
+	font-weight: normal;
+	padding: 0.25em 0.5em;
+	line-height: 1.5;
+	min-height: 1.5em;
+	text-align: left;
+}
+
+th {
+	color: rgba(55, 53, 47, 0.6);
+}
+
+ol,
+ul {
+	margin: 0;
+	margin-block-start: 0.6em;
+	margin-block-end: 0.6em;
+}
+
+li > ol:first-child,
+li > ul:first-child {
+	margin-block-start: 0.6em;
+}
+
+ul > li {
+	list-style: disc;
+}
+
+ul.to-do-list {
+	text-indent: -1.7em;
+}
+
+ul.to-do-list > li {
+	list-style: none;
+}
+
+.to-do-children-checked {
+	text-decoration: line-through;
+	opacity: 0.375;
+}
+
+ul.toggle > li {
+	list-style: none;
+}
+
+ul {
+	padding-inline-start: 1.7em;
+}
+
+ul > li {
+	padding-left: 0.1em;
+}
+
+ol {
+	padding-inline-start: 1.6em;
+}
+
+ol > li {
+	padding-left: 0.2em;
+}
+
+.mono ol {
+	padding-inline-start: 2em;
+}
+
+.mono ol > li {
+	text-indent: -0.4em;
+}
+
+.toggle {
+	padding-inline-start: 0em;
+	list-style-type: none;
+}
+
+/* Indent toggle children */
+.toggle > li > details {
+	padding-left: 1.7em;
+}
+
+.toggle > li > details > summary {
+	margin-left: -1.1em;
+}
+
+.selected-value {
+	display: inline-block;
+	padding: 0 0.5em;
+	background: rgba(206, 205, 202, 0.5);
+	border-radius: 3px;
+	margin-right: 0.5em;
+	margin-top: 0.3em;
+	margin-bottom: 0.3em;
+	white-space: nowrap;
+}
+
+.collection-title {
+	display: inline-block;
+	margin-right: 1em;
+}
+
+.simple-table {
+	margin-top: 1em;
+	font-size: 0.875rem;
+	empty-cells: show;
+}
+.simple-table td {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table th {
+	height: 29px;
+	min-width: 120px;
+}
+
+.simple-table-header-color {
+	background: rgb(247, 246, 243);
+	color: black;
+}
+.simple-table-header {
+	font-weight: 500;
+}
+
+time {
+	opacity: 0.5;
+}
+
+.icon {
+	display: inline-block;
+	max-width: 1.2em;
+	max-height: 1.2em;
+	text-decoration: none;
+	vertical-align: text-bottom;
+	margin-right: 0.5em;
+}
+
+img.icon {
+	border-radius: 3px;
+}
+
+.user-icon {
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 100%;
+	margin-right: 0.5rem;
+}
+
+.user-icon-inner {
+	font-size: 0.8em;
+}
+
+.text-icon {
+	border: 1px solid #000;
+	text-align: center;
+}
+
+.page-cover-image {
+	display: block;
+	object-fit: cover;
+	width: 100%;
+	max-height: 30vh;
+}
+
+.page-header-icon {
+	font-size: 3rem;
+	margin-bottom: 1rem;
+}
+
+.page-header-icon-with-cover {
+	margin-top: -0.72em;
+	margin-left: 0.07em;
+}
+
+.page-header-icon img {
+	border-radius: 3px;
+}
+
+.link-to-page {
+	margin: 1em 0;
+	padding: 0;
+	border: none;
+	font-weight: 500;
+}
+
+p > .user {
+	opacity: 0.5;
+}
+
+td > .user,
+td > time {
+	white-space: nowrap;
+}
+
+input[type="checkbox"] {
+	transform: scale(1.5);
+	margin-right: 0.6em;
+	vertical-align: middle;
+}
+
+p {
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+}
+
+.image {
+	border: none;
+	margin: 1.5em 0;
+	padding: 0;
+	border-radius: 0;
+	text-align: center;
+}
+
+.code,
+code {
+	background: rgba(135, 131, 120, 0.15);
+	border-radius: 3px;
+	padding: 0.2em 0.4em;
+	border-radius: 3px;
+	font-size: 85%;
+	tab-size: 2;
+}
+
+code {
+	color: #eb5757;
+}
+
+.code {
+	padding: 1.5em 1em;
+}
+
+.code-wrap {
+	white-space: pre-wrap;
+	word-break: break-all;
+}
+
+.code > code {
+	background: none;
+	padding: 0;
+	font-size: 100%;
+	color: inherit;
+}
+
+blockquote {
+	font-size: 1.25em;
+	margin: 1em 0;
+	padding-left: 1em;
+	border-left: 3px solid rgb(55, 53, 47);
+}
+
+.bookmark {
+	text-decoration: none;
+	max-height: 8em;
+	padding: 0;
+	display: flex;
+	width: 100%;
+	align-items: stretch;
+}
+
+.bookmark-title {
+	font-size: 0.85em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	height: 1.75em;
+	white-space: nowrap;
+}
+
+.bookmark-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.bookmark-info {
+	flex: 4 1 180px;
+	padding: 12px 14px 14px;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.bookmark-image {
+	width: 33%;
+	flex: 1 1 180px;
+	display: block;
+	position: relative;
+	object-fit: cover;
+	border-radius: 1px;
+}
+
+.bookmark-description {
+	color: rgba(55, 53, 47, 0.6);
+	font-size: 0.75em;
+	overflow: hidden;
+	max-height: 4.5em;
+	word-break: break-word;
+}
+
+.bookmark-href {
+	font-size: 0.75em;
+	margin-top: 0.25em;
+}
+
+.sans { font-family: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol"; }
+.code { font-family: "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace; }
+.serif { font-family: Lyon-Text, Georgia, ui-serif, serif; }
+.mono { font-family: iawriter-mono, Nitti, Menlo, Courier, monospace; }
+.pdf .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK JP'; }
+.pdf:lang(zh-CN) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK SC'; }
+.pdf:lang(zh-TW) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK TC'; }
+.pdf:lang(ko-KR) .sans { font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji", "Segoe UI Symbol", 'Twemoji', 'Noto Color Emoji', 'Noto Sans CJK KR'; }
+.pdf .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .code { font-family: Source Code Pro, "SFMono-Regular", Menlo, Consolas, "PT Mono", "Liberation Mono", Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.pdf .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK JP'; }
+.pdf:lang(zh-CN) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK SC'; }
+.pdf:lang(zh-TW) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK TC'; }
+.pdf:lang(ko-KR) .serif { font-family: PT Serif, Lyon-Text, Georgia, ui-serif, serif, 'Twemoji', 'Noto Color Emoji', 'Noto Serif CJK KR'; }
+.pdf .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK JP'; }
+.pdf:lang(zh-CN) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK SC'; }
+.pdf:lang(zh-TW) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK TC'; }
+.pdf:lang(ko-KR) .mono { font-family: PT Mono, iawriter-mono, Nitti, Menlo, Courier, monospace, 'Twemoji', 'Noto Color Emoji', 'Noto Sans Mono CJK KR'; }
+.highlight-default {
+	color: rgba(55, 53, 47, 1);
+}
+.highlight-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.highlight-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.highlight-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.highlight-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.highlight-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.highlight-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.highlight-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.highlight-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.highlight-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.highlight-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.highlight-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.highlight-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.highlight-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.highlight-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.highlight-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.highlight-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.highlight-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.highlight-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.block-color-default {
+	color: inherit;
+	fill: inherit;
+}
+.block-color-gray {
+	color: rgba(120, 119, 116, 1);
+	fill: rgba(120, 119, 116, 1);
+}
+.block-color-brown {
+	color: rgba(159, 107, 83, 1);
+	fill: rgba(159, 107, 83, 1);
+}
+.block-color-orange {
+	color: rgba(217, 115, 13, 1);
+	fill: rgba(217, 115, 13, 1);
+}
+.block-color-yellow {
+	color: rgba(203, 145, 47, 1);
+	fill: rgba(203, 145, 47, 1);
+}
+.block-color-teal {
+	color: rgba(68, 131, 97, 1);
+	fill: rgba(68, 131, 97, 1);
+}
+.block-color-blue {
+	color: rgba(51, 126, 169, 1);
+	fill: rgba(51, 126, 169, 1);
+}
+.block-color-purple {
+	color: rgba(144, 101, 176, 1);
+	fill: rgba(144, 101, 176, 1);
+}
+.block-color-pink {
+	color: rgba(193, 76, 138, 1);
+	fill: rgba(193, 76, 138, 1);
+}
+.block-color-red {
+	color: rgba(212, 76, 71, 1);
+	fill: rgba(212, 76, 71, 1);
+}
+.block-color-gray_background {
+	background: rgba(241, 241, 239, 1);
+}
+.block-color-brown_background {
+	background: rgba(244, 238, 238, 1);
+}
+.block-color-orange_background {
+	background: rgba(251, 236, 221, 1);
+}
+.block-color-yellow_background {
+	background: rgba(251, 243, 219, 1);
+}
+.block-color-teal_background {
+	background: rgba(237, 243, 236, 1);
+}
+.block-color-blue_background {
+	background: rgba(231, 243, 248, 1);
+}
+.block-color-purple_background {
+	background: rgba(244, 240, 247, 0.8);
+}
+.block-color-pink_background {
+	background: rgba(249, 238, 243, 0.8);
+}
+.block-color-red_background {
+	background: rgba(253, 235, 236, 1);
+}
+.select-value-color-pink { background-color: rgba(245, 224, 233, 1); }
+.select-value-color-purple { background-color: rgba(232, 222, 238, 1); }
+.select-value-color-green { background-color: rgba(219, 237, 219, 1); }
+.select-value-color-gray { background-color: rgba(227, 226, 224, 1); }
+.select-value-color-opaquegray { background-color: rgba(255, 255, 255, 0.0375); }
+.select-value-color-orange { background-color: rgba(250, 222, 201, 1); }
+.select-value-color-brown { background-color: rgba(238, 224, 218, 1); }
+.select-value-color-red { background-color: rgba(255, 226, 221, 1); }
+.select-value-color-yellow { background-color: rgba(253, 236, 200, 1); }
+.select-value-color-blue { background-color: rgba(211, 229, 239, 1); }
+
+.checkbox {
+	display: inline-flex;
+	vertical-align: text-bottom;
+	width: 16;
+	height: 16;
+	background-size: 16px;
+	margin-left: 2px;
+	margin-right: 5px;
+}
+
+.checkbox-on {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20width%3D%2216%22%20height%3D%2216%22%20fill%3D%22%2358A9D7%22%2F%3E%0A%3Cpath%20d%3D%22M6.71429%2012.2852L14%204.9995L12.7143%203.71436L6.71429%209.71378L3.28571%206.2831L2%207.57092L6.71429%2012.2852Z%22%20fill%3D%22white%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+
+.checkbox-off {
+	background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2216%22%20height%3D%2216%22%20viewBox%3D%220%200%2016%2016%22%20fill%3D%22none%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%0A%3Crect%20x%3D%220.75%22%20y%3D%220.75%22%20width%3D%2214.5%22%20height%3D%2214.5%22%20fill%3D%22white%22%20stroke%3D%22%2336352F%22%20stroke-width%3D%221.5%22%2F%3E%0A%3C%2Fsvg%3E");
+}
+	
+</style></head><body><article id="40687a73-e70a-4302-bc1a-736b9fded3ad" class="page sans"><header><div class="page-header-icon undefined"><img class="icon" src="https://cdn.icon-icons.com/icons2/2415/PNG/512/javascript_original_logo_icon_146455.png"/></div><h1 class="page-title">JavaScript</h1><table class="properties"><tbody><tr class="property-row property-row-multi_select"><th><span class="icon property-icon"><svg viewBox="0 0 14 14" style="width:14px;height:14px;display:block;fill:rgba(55, 53, 47, 0.45);flex-shrink:0;-webkit-backface-visibility:hidden" class="typesMultipleSelect"><path d="M4,3 C4,2.447715 4.447715,2 5,2 L12,2 C12.5523,2 13,2.447716 13,3 C13,3.55228 12.5523,4 12,4 L5,4 C4.447715,4 4,3.55228 4,3 Z M4,7 C4,6.447715 4.447715,6 5,6 L12,6 C12.5523,6 13,6.447716 13,7 C13,7.55228 12.5523,8 12,8 L5,8 C4.447715,8 4,7.55228 4,7 Z M4,11 C4,10.447715 4.447715,10 5,10 L12,10 C12.5523,10 13,10.447716 13,11 C13,11.55228 12.5523,12 12,12 L5,12 C4.447715,12 4,11.55228 4,11 Z M2,4 C1.44771525,4 1,3.55228475 1,3 C1,2.44771525 1.44771525,2 2,2 C2.55228475,2 3,2.44771525 3,3 C3,3.55228475 2.55228475,4 2,4 Z M2,8 C1.44771525,8 1,7.55228475 1,7 C1,6.44771525 1.44771525,6 2,6 C2.55228475,6 3,6.44771525 3,7 C3,7.55228475 2.55228475,8 2,8 Z M2,12 C1.44771525,12 1,11.5522847 1,11 C1,10.4477153 1.44771525,10 2,10 C2.55228475,10 3,10.4477153 3,11 C3,11.5522847 2.55228475,12 2,12 Z"></path></svg></span>Tags</th><td></td></tr></tbody></table></header><div class="page-body"><nav id="7611d730-9f9a-42c1-a5b7-8c05674582d6" class="block-color-gray table_of_contents"><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#7172ed99-6ff4-4eb3-9d34-ee9c91a9d46f">Khai báo biến</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#b8707131-5302-49bd-8b46-fb3cce66705d">Comment</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#905129be-ca44-4f39-8b97-30da1c78a907">Kiểu dữ liệu (Datatype)</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ea40145a-29e7-4f50-a41f-24b189d62b65">Toán tử</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37ca282e-4116-4ad8-9c33-1fd0850112fb">Toán tử số học - Arithmetic</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#54902ddf-98c2-4441-951e-e7d338927d94">Toán tử gán - Assignment</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#37847a17-f06f-42c4-a87f-f5a1d270630a">Toán tử so sánh - Comparison</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#4fcbd9ed-f27c-4542-91dc-84772cecf720">Toán tử logic - Logic</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#dbfc9b01-7cd4-4d43-9e18-30f49ad28216">Toán tử chuỗi</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#bea62a2a-d0c5-4b73-b573-492fb943503a">Câu lệnh If - else</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#d0d0944e-8132-449b-b7b1-6afe508d431e">Toán tử ba ngôi - Ternary operator</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#769b9c9a-dec0-469f-ad8a-829982b137ad">Switch Case</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#233f10a6-f5cb-41ce-831b-fb1f6836bdda">String</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#1641e263-ac4b-4999-b67d-67eaa480b0e1">Number</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8d5d7d54-fb5b-477e-986f-29713bdc0ba1">Mảng - Array</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8a605ac5-44c8-4b74-b3f3-ce4cf70ab056">Hàm - Function</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#f87d3b12-791f-4007-b42a-b5761715a75f">Object</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#abdd7ce3-e56c-4a6e-9a98-eee1931c71b6">Vòng lặp - Loop</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#50352768-977e-45f0-819d-5bc14edd9ade">For</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#e1dc2eec-6e2a-4eab-8fcb-62964283de36">While</a></div><div class="table_of_contents-item table_of_contents-indent-1"><a class="table_of_contents-link" href="#f3436c46-2c65-40da-823e-24fcfec4cfad">Do-while</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#ab83d7fa-035a-4eda-a5d0-d55630df22f3">Callback</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#88616ec6-2751-4eb2-9ed5-98e9e3ca881c">Array.map()</a></div><div class="table_of_contents-item table_of_contents-indent-0"><a class="table_of_contents-link" href="#8dcd3c1e-8b14-4fa2-a3b6-775c278e9cba">Array.filter()</a></div></nav><h1 id="7172ed99-6ff4-4eb3-9d34-ee9c91a9d46f" class="">Khai báo biến</h1><ul id="40092cdf-5097-4c1f-a799-7009ee94a62d" class="bulleted-list"><li style="list-style-type:disc">Có thể sử dụng: let, const và var. NHƯNG <mark class="highlight-red">không</mark> khuyên dùng var.</li></ul><ul id="0c558e69-f08f-40f0-92ac-98523286881b" class="bulleted-list"><li style="list-style-type:disc">Quy tắc đặt tên cho một biến:<ul id="da4b7413-2e04-4e60-8387-49ee19a43261" class="bulleted-list"><li style="list-style-type:circle">Chỉ được bắt đầu bằng chữ hoặc ký tự $ và _ (dấu gạch dưới)</li></ul><ul id="2af08c17-79b3-49b4-aa8d-03c8b967a27a" class="bulleted-list"><li style="list-style-type:circle">Các từ viết dính liền với nhau và ký tự đầu mỗi từ được viết hoa. Ví dụ:<ul id="1b2c9775-077f-4968-b6a5-5d149f67e3ff" class="bulleted-list"><li style="list-style-type:square">let dayLaTenMotBien = ‘hello’;</li></ul><ul id="080d80c0-267e-46ec-b0e5-419e41a1ef29" class="bulleted-list"><li style="list-style-type:square">const num1 = 123;</li></ul></li></ul></li></ul><h1 id="b8707131-5302-49bd-8b46-fb3cce66705d" class="">Comment</h1><ul id="3981d59a-8ad0-426e-b3d9-ffb6c4ee26ca" class="bulleted-list"><li style="list-style-type:disc">Comment được sử dụng cho:<ul id="0397b301-f712-40c6-8001-32eeb47877f4" class="bulleted-list"><li style="list-style-type:circle">Vô hiệu hóa mã</li></ul><ul id="9d8f1399-e1e1-4cec-9925-3ae666a906ea" class="bulleted-list"><li style="list-style-type:circle">Ghi chú</li></ul><p id="e1add865-ce49-433a-bfc8-a84422afa623" class="">
+</p></li></ul><h1 id="905129be-ca44-4f39-8b97-30da1c78a907" class="">Kiểu dữ liệu (Datatype)</h1><ul id="6ab4f516-c0f9-4547-a70e-6928f4324aa9" class="bulleted-list"><li style="list-style-type:disc">Kiểu<strong> dữ liệu nguyên thủy (Primitive Types):</strong><ul id="c807e895-5805-4bb7-802c-f5aff7bbc568" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal">s</mark><mark class="highlight-teal"><strong>tring</strong></mark><strong>: kiểu chuỗi, được đặt trong cặp dấu nháy đổi (“ “) hoặc nháy đơn (‘ ‘)</strong></li></ul><ul id="5e1cc677-c184-496d-a0c5-e9680520814e" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal">n</mark><mark class="highlight-teal"><strong>umber</strong></mark><strong>: số thập phân, số nguyên</strong></li></ul><ul id="4e0ffba8-eebb-4682-aa74-8d0d78ab2625" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal">b</mark><mark class="highlight-teal"><strong>oolean</strong></mark><strong>: là dữ liệu chỉ có 2 giá trị True hoặc False</strong><ul id="ffcbb532-7ea5-4e2c-9d5c-d226473ed335" class="bulleted-list"><li style="list-style-type:square">Có các giá trị sẽ luôn trả về là False, chúng được gọi là Falsy Values:<ul id="128f84d0-afbc-4ba8-a841-b3c8e540f15c" class="bulleted-list"><li style="list-style-type:disc">0</li></ul><ul id="a8b76837-c24f-47c5-9b65-ee68d72edc58" class="bulleted-list"><li style="list-style-type:disc">false</li></ul><ul id="efd67324-7536-4756-a3da-8d28ef1e95a9" class="bulleted-list"><li style="list-style-type:disc">‘’ hoặc “” (không có khoảng trắng)</li></ul><ul id="410fa706-9d9d-463d-b92d-7177f16798fe" class="bulleted-list"><li style="list-style-type:disc">undefined</li></ul><ul id="2c86074b-693c-4944-9231-be428d7d31b0" class="bulleted-list"><li style="list-style-type:disc">NaN</li></ul><ul id="6d3e36db-ad5a-4dbd-a1d1-c2c2cf110b38" class="bulleted-list"><li style="list-style-type:disc">null</li></ul></li></ul></li></ul><ul id="a710c924-c79e-42e8-acb0-8ae3b86c2098" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal"><strong>undefined</strong></mark><strong>: kiểu dữ liệu chưa xác định</strong></li></ul><ul id="8af650fa-7560-4d79-9724-a6083f1f9c26" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal"><strong>null</strong></mark><strong>: biến không có giá trị</strong></li></ul><ul id="326286ba-4940-4d45-b6ab-dd8aa4e994eb" class="bulleted-list"><li style="list-style-type:circle">BigInt: dùng cho những số nguyên cực lớn hơn 2^53 -1 và nhỏ hơn -(2^53-1)</li></ul><ul id="fac84e5c-6f4b-4052-aad3-8b8dde958296" class="bulleted-list"><li style="list-style-type:circle">Symbol: tạo ra các giá trị duy nhất (unique value) và bất biến (immutable)</li></ul></li></ul><ul id="ab90ed5b-312f-4141-8043-6f9270402895" class="bulleted-list"><li style="list-style-type:disc">Kiểu dữ liệu phức tạp (Complex Data): <ul id="8b0effe3-bf6f-41ae-b9ef-1efa690a9ece" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal">Function</mark></li></ul><ul id="0c0a751e-9860-4405-84c1-7d46b7d4bae4" class="bulleted-list"><li style="list-style-type:circle"><mark class="highlight-teal">O</mark><mark class="highlight-teal"><strong>bjects</strong></mark><strong>: </strong>kiểu dữ liệu tham chiếu, gồm các cặp key - value. Ví dụ:</li></ul><pre id="4cfd11bc-e462-4087-a43c-0378f96c2685" class="code"><code>let myObj = {
+	a : 1,
+	b : &#x27;hello&#x27;,
+	10 : [1, &#x27;cat&#x27;, 4],
+	myFunction: function() {
+		//TODO
+	}
+}</code></pre></li></ul><p id="e134c67a-c72e-414c-9e70-f00daff605dc" class="">❗<strong>Phân biệt cơ bản </strong><em><strong>null</strong></em><strong> và </strong><em><strong>undefined</strong></em><strong>:</strong><div class="indented"><ul id="343eda85-05d5-40f1-8cfa-2d9101edb109" class="bulleted-list"><li style="list-style-type:disc">Khi khai báo một biến, nhưng ta không gán giá trị =&gt; undefined<figure id="ddaa97b3-caa4-444f-b9d3-73574a4c4326" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled.png"><img style="width:273px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled.png"/></a></figure></li></ul><ul id="fb771b19-1aa1-4906-976c-65691372bf29" class="bulleted-list"><li style="list-style-type:disc">Null được cấp phát cho biến, và nó cho biết rằng biến đã được định nghĩa (defined) nhưng thiếu giá trị (missing value) theo chủ đích <ul id="ce91c46d-e327-400a-b7a9-f46ccd4f254e" class="bulleted-list"><li style="list-style-type:circle">let test = null;</li></ul></li></ul></div></p><p id="be3d5768-9bc7-423c-b110-88557c1409e5" class="">💡Cách kiểm tra kiểu dữ liệu:</p><pre id="0eac97aa-24b1-42e7-8c89-77095f555baf" class="code"><code>console.log(typeof 3) //number</code></pre><h1 id="ea40145a-29e7-4f50-a41f-24b189d62b65" class="">Toán tử</h1><h2 id="37ca282e-4116-4ad8-9c33-1fd0850112fb" class="">Toán tử số học - Arithmetic</h2><figure id="2f57c81f-4c3a-4eb9-8dd0-85ad087b294e" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%201.png"><img style="width:790px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%201.png"/></a></figure><p id="8b0d003f-be6c-4ab8-801a-c2864485dea2" class="">❗Toán tử ++ và -- sẽ có hai trường hợp sau:</p><ul id="df0129a2-51be-4cc1-8b52-3d5ac41392ee" class="bulleted-list"><li style="list-style-type:disc">Prefix - Tiền tố ++x:<figure id="b87a3d1c-08e2-4d62-8ab3-ce9ad1d1fed6" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%202.png"><img style="width:133px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%202.png"/></a></figure><ul id="79dd35b8-40e2-4a25-b880-54ea6db8b8ad" class="bulleted-list"><li style="list-style-type:circle">let x = 5;</li></ul><ul id="a4b5e4bd-9798-40e9-b53e-ca8c79214690" class="bulleted-list"><li style="list-style-type:circle">(++x) sẽ trả kết quả 6; có nghĩa là x + 1 = 5 + 1 = 6 và gán vào biến x, rồi mới trả về.</li></ul></li></ul><ul id="de0905c6-5ccf-498e-850b-3297dec48ade" class="bulleted-list"><li style="list-style-type:disc">Postfix - Hậu tố x++:<figure id="2441a4f6-8682-468b-8d6f-d49d5eb024da" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%203.png"><img style="width:107px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%203.png"/></a></figure><ul id="d2dff4c6-974c-4e49-824e-722d00201e06" class="bulleted-list"><li style="list-style-type:circle">let x = 5;</li></ul><ul id="fddf16e9-3703-44dd-add5-d2ffad35f935" class="bulleted-list"><li style="list-style-type:circle">(x++) sẽ trả kết quả 5; có nghĩa là x + 1= 5 + 1 = 6 nhưng không trả về ngay mà lần kế gọi x, khi đó ta mới có x = 6.</li></ul></li></ul><p id="b5d59a8b-fa48-40ce-a613-303fd6ac15a9" class="">📖Bài tập thử:</p><pre id="9a6b0135-2c18-4663-b275-6ab49306fba8" class="code"><code>let number = 6;
+let output = number++ + --number; // Result = 12
+
+let number2 = 6;
+let output2 = ++number2 * 2 - number2-- * 2; // Result = 0</code></pre><h2 id="54902ddf-98c2-4441-951e-e7d338927d94" class="">Toán tử gán - Assignment</h2><figure id="79138a48-bdd8-4d2a-811a-76c12384c9bf" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%204.png"><img style="width:587px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%204.png"/></a></figure><h2 id="37847a17-f06f-42c4-a87f-f5a1d270630a" class="">Toán tử so sánh - Comparison</h2><figure id="feef6c52-cdc7-4797-a98e-b19313cf208c" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%205.png"><img style="width:587px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%205.png"/></a></figure><p id="cece33b8-cc0a-4c2c-aeec-b39274da2969" class="">💡Thường đi kèm với lệnh điều kiện</p><p id="94a5bc87-3137-4a19-85d7-20dd235964f6" class="">💡Giá trị trả về là True hoặc False</p><p id="ec4883a3-d4ab-4554-a8e1-4b8e0ddf37ab" class="">❗<strong>Lưu ý</strong>: JavaScript có hai dạng so sánh:<div class="indented"><ul id="988750c0-92f4-4e21-83a9-eb35a9f70dc4" class="bulleted-list"><li style="list-style-type:disc">So sánh trừu tượng (abstract equality): ==</li></ul><ul id="3f4a400b-c9f4-4eec-8062-08fb7ee7f231" class="bulleted-list"><li style="list-style-type:disc">So sánh nghiêm ngặt (strict equality): ===</li></ul><p id="ef512a3d-a950-4eb4-987e-8f5a3be4dbcf" class=""><em>📑Tương tự cho khác nhau !== và !=</em></p><p id="bed456e9-c8a4-44c5-8c6b-532ef995c59c" class="">💡<strong>Sự khác biệt:</strong>Toán tử so sánh trừu tượng sẽ cố gắng giải quyết các kiểu dữ liệu thông qua việc chuyển đổi kiểu dữ liệu trước khi so sánh, còn toán tử so sánh nghiêm ngặt sẽ trả về false nếu các giá trị khác nhau.</p><p id="8d9c7156-5b87-446c-9ff3-a6db83f843b8" class="">⇒ <mark class="highlight-teal"><strong>Nên sử dụng so sánh nghiêm ngặt</strong></mark>, vì sẽ làm tăng sự rõ ràng của code và giúp ngăn chặn những sai sót phát sinh từ việc sử dụng so sánh trừu tượng.</p><figure id="06559dfa-c3d1-4ae2-a54d-b5a696db3337" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%206.png"><img style="width:91px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%206.png"/></a></figure></div></p><h2 id="4fcbd9ed-f27c-4542-91dc-84772cecf720" class="">Toán tử logic - Logic</h2><figure id="c43227d3-d672-4be6-b357-682a41c37b97" class="image"><a href="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%207.png"><img style="width:590px" src="JavaScript%20ddaa97b3caa4444fb9d373574a4c4326/Untitled%207.png"/></a></figure><p id="0f9df16b-78d2-43f4-a316-f6ff82e8b89e" class="">💡Nâng cao:</p><pre id="209c6d77-886e-4f82-b77b-1b1d0187b3d1" class="code"><code>let result = &#x27;A&#x27; &amp;&amp; &#x27;B&#x27; &amp;&amp; &#x27;C&#x27;;
+console.log(result); // C
+
+let result = &#x27;A&#x27; &amp;&amp; null &amp;&amp; &#x27;C&#x27;;
+console.log(result); // null</code></pre><ul id="d7d61b8a-763b-49a7-bd6a-af92daccecbc" class="bulleted-list"><li style="list-style-type:disc">Khi giá trị khác các giá trị thuộc Falsy Values, điều kiện &amp;&amp; sẽ tiếp tục thực hiện qua phải đến hết và trả giá trị cuối. Nếu gặp phải giá trị Falsy Value sẽ dừng lại ngay và trả về đúng giá trị đó.</li></ul><pre id="3e1ad3bf-4e6f-46d2-81d7-7feca7cdb3f1" class="code"><code>let result = &#x27;A&#x27; || &#x27;B&#x27; || &#x27;C&#x27;;
+console.log(result); // A
+
+let result = &#x27;A&#x27; || undefined || &#x27;C&#x27;;
+console.log(result); // A</code></pre><ul id="c6879be2-0588-4209-bf25-cc634cdb2355" class="bulleted-list"><li style="list-style-type:disc">Trường hợp || thì cứ gặp đúng giá trị khác Falsy Values thì trả về giá trị đó luôn. </li></ul><h2 id="dbfc9b01-7cd4-4d43-9e18-30f49ad28216" class="">Toán tử chuỗi</h2><ul id="b659f978-7ba8-4dd1-95c5-f93f76e9e253" class="bulleted-list"><li style="list-style-type:disc">‘+’: ở đây có nghĩa là nối chuỗi</li></ul><pre id="c4705ef6-fe7f-446d-91a3-5182899c5fea" class="code"><code>let firstName = &#x27;Minh&#x27;;
+let lastName = &#x27;Quach&#x27;;
+
+console.log(firstName + &#x27; &#x27; + lastName); </code></pre><h1 id="bea62a2a-d0c5-4b73-b573-492fb943503a" class="">Câu lệnh If - else</h1><pre id="34883722-f5b3-4bec-9b92-a318aee2c4bf" class="code"><code>let num = 2;
+if(num &gt; 10) {
+	console.log(&#x27;So nay lon hon 10&#x27;);
+} else if (num === 10) {
+	console.log(&#x27;So nay bang 10&#x27;);
+} else {
+	console.log(&#x27;So nay nho hon 10&#x27;);
+}
+
+let num2 = 3;
+if(num &gt; 0 &amp;&amp; num2 &gt; 0) {
+	console.log(&#x27;Cac so deu lon hon 0&#x27;);
+}</code></pre><h1 id="d0d0944e-8132-449b-b7b1-6afe508d431e" class="">Toán tử ba ngôi - Ternary operator</h1><ul id="2318eb16-547f-439b-b5e2-22807233c45a" class="bulleted-list"><li style="list-style-type:disc">Một cách nâng cao và rút gọn code của If-else:<pre id="1f2de61c-f8c1-4170-901a-085858d426fe" class="code"><code>let num = 2;
+
+if (num &gt; 0) {
+	console.log(&#x27;Positive number&#x27;);
+} else {
+	console.log(&#x27;Negative number&#x27;);
+}</code></pre><p id="2067d2c8-ff30-4808-823f-1ca1f9f65cc5" class="">Biến thành:</p><pre id="ca21a832-92dc-47c8-b156-0cd7b2286f57" class="code"><code>let num = 2;
+
+let result = num &gt; 0 ? &#x27;Positive number&#x27; : &#x27;Negative number&#x27;;
+console.log(result);</code></pre></li></ul><h1 id="769b9c9a-dec0-469f-ad8a-829982b137ad" class="">Switch Case</h1><pre id="fddf03c0-c6d9-4478-a31f-4542098c490e" class="code"><code>// program using switch statement
+let a = 2;
+
+switch (a) {
+
+    case 1:
+        a = &#x27;one&#x27;;
+        break;
+    case 2:
+        a = &#x27;two&#x27;;
+        break;
+    default:
+        a = &#x27;not found&#x27;;
+        break;
+}
+console.log(`The value is ${a}`);</code></pre><h1 id="233f10a6-f5cb-41ce-831b-fb1f6836bdda" class="">String</h1><ul id="8520bcd7-4892-4825-ae27-f053441fba19" class="bulleted-list"><li style="list-style-type:disc">Chuỗi là bao gồm sự sắp xếp có thứ tự của các ký tự. Ký tự đầu tiên luôn ở vị trí 0</li></ul><ul id="981a57b0-a966-4175-9674-9b87c2173062" class="bulleted-list"><li style="list-style-type:disc">‘\’ dấu backslash để hiện đúng ký tự kế mà ta muốn thể hiện trong string<pre id="52fafa4e-793f-41e9-9cab-a61ae0cbc6eb" class="code"><code>console.log(&#x27;This is a quote\&#x27;hello from me\&#x27;.&#x27;)
+// This is a quote &#x27;hello from me&#x27;.</code></pre></li></ul><ul id="48caa18c-f1bd-448d-8d50-352066a17978" class="bulleted-list"><li style="list-style-type:disc">Template String:<pre id="2cc35f66-06ff-4a9d-99b3-dd98edd53d0a" class="code"><code>let firstName = &#x27;Minh&#x27;;
+let lastName = &#x27;Quach&#x27;;
+
+console.log(&#x27;My full name: ${fistName} ${lastName}&#x27;); </code></pre></li></ul><ul id="543a7bd8-d1b5-4237-afc3-57c42637cc02" class="bulleted-list"><li style="list-style-type:disc">Thuộc tính và phương thức:</li></ul><pre id="7898dfc3-67a5-497d-b1c1-65c14c817c69" class="code"><code>let myStr = &#x27;  This is a string. This is another sentence.    &#x27;;
+
+// Length
+console.log(myStr.length);
+
+// Find index
+console.log(myStr.indexOf(&#x27;is&#x27;); // Perform from index of 0
+console.log(myStr.indexOf(&#x27;is&#x27;, 8); // Perform from index of 8
+console.log(myStr.search(&#x27;is&#x27;); // Can use with RegEx
+
+// Cut String
+console.log(myStr.slice(0, 4));
+
+// Replace
+console.log(myStr.replace(&#x27;string&#x27;, &#x27;STRING&#x27;));
+
+// Convert to UPPERCASE or to lowercase
+console.log(myStr.toUpperCase());
+console.log(myStr.toLowerCase());
+
+// Trim
+console.log(myStr.trim()); // get rid of blank on both sides
+
+// Split
+console.log(myStr.split(&#x27; &#x27;)); // Transform string to array by &#x27; &#x27;
+
+// Get a character by index
+console.log(myStr.charAt(9));
+console.log(myStr[9]);
+</code></pre><h1 id="1641e263-ac4b-4999-b67d-67eaa480b0e1" class="">Number</h1><ul id="638b0716-3396-45cc-9a46-52dd79ec25d8" class="bulleted-list"><li style="list-style-type:disc">isNaN(): dùng để kiếm tra có phải là số</li></ul><pre id="f559291f-f01e-4fa0-8630-fa5b1e2d5f0d" class="code"><code>let num1 = 18.38291;
+
+// Convert to String
+num1.toString(); 
+
+// Format a number using fixed-point notation
+num1.toFixed(2);
+</code></pre><h1 id="8d5d7d54-fb5b-477e-986f-29713bdc0ba1" class="">Mảng - Array</h1><ul id="0bf26d41-3c2a-4723-8396-e4296cd68c05" class="bulleted-list"><li style="list-style-type:disc">Mảng được dùng để chứa nhiều giá trị (bất kỳ Datatypes nào)  và có thể truy cập bằng chỉ số vị trí</li></ul><ul id="c71ce862-5abb-44de-8e36-cfe0a10c00be" class="bulleted-list"><li style="list-style-type:disc">Kiểm tra có phải array hay không?<pre id="358a4c6d-bce0-45ef-87c3-55f2eafc2b21" class="code"><code>Array.isArray(x);
+</code></pre></li></ul><ul id="3400f42c-6578-4c72-9b6b-119e141b9c38" class="bulleted-list"><li style="list-style-type:disc">Thuộc tính và phương thức:<pre id="4a6b2db1-2c47-483b-8358-922bb1c104d4" class="code"><code>const myArr = [1, 3, &#x27;b&#x27;, 2, &#x27;e&#x27;, 5];
+
+// Access a value
+myArr[2];
+
+// Converts an array to a string of (comma separated) array values
+myArr.toString();
+
+// Joins all array elements into a string
+myArr.join(&#x27;-&#x27;);
+
+// Removes the last element from an array
+myArr.pop();
+
+// Add new item at the end of an array
+myArr.push(&#x27;f&#x27;);
+
+// Removes the first array element and &quot;shifts&quot; all other elements to a lower index.
+myArr.shift();
+
+// Adds a new element to an array (at the beginning), and &quot;unshifts&quot; older elements:
+myArr.unshift(&#x27;g&#x27;);
+
+// Creates a new array by merging (concatenating) existing arrays
+const arr2 = [8, 9, 10];
+const newArr = myArr.concat(arr2);
+
+// Splice() 
+	// The first parameter (2) defines the position where new elements should be added
+	// The second parameter (0) defines how many elements should be removed.
+	// The third parameter defines what element should be added
+myArr.splice(2, 0, &#x27;hello&#x27;);
+
+// Slices out a piece of an array into a new array.
+myArr.slice(3, 6);</code></pre></li></ul><h1 id="8a605ac5-44c8-4b74-b3f3-ce4cf70ab056" class="">Hàm - Function</h1><ul id="7f12b727-c97e-48d5-8de7-7c70540669a0" class="bulleted-list"><li style="list-style-type:disc">Hàm là một khối mã và làm 1 việc cụ thể</li></ul><ul id="eb30c088-9bab-4b8f-9dbc-51febfd96abd" class="bulleted-list"><li style="list-style-type:disc">Một số hàm Built-in<ul id="76f22e06-c79b-4ae7-8b97-7c6663217a72" class="bulleted-list"><li style="list-style-type:circle">Đây là các hàm được xây dựng sẵn trong JS, có thể gọi và sử dụng liền</li></ul><ul id="722d9f1e-2559-4e51-8f52-a6a3994e3326" class="bulleted-list"><li style="list-style-type:circle">Một số hàm cơ bản và thường dùng:<pre id="b911d924-9bb6-41ed-b53f-0dbe266b9db6" class="code"><code>alert();
+console.log();
+confirm();
+prompt();
+setTimeout();
+setInterval();
+//setInterval() khác chỗ sẽ chạy sau cacác khoảng thời gian bằng nhau</code></pre></li></ul></li></ul><ul id="eac36e02-b326-4a7e-af69-caf7cc2956fa" class="bulleted-list"><li style="list-style-type:disc">Hàm không thực thi khi được định nghĩa, sẽ được thực hiện khi được gọi</li></ul><ul id="1d6264a4-9d70-4ebe-b6d6-51df13b8d6bd" class="bulleted-list"><li style="list-style-type:disc">Hàm có thể nhận tham số</li></ul><ul id="32f598d9-90d7-4983-b859-9648dfb1cf78" class="bulleted-list"><li style="list-style-type:disc">Hàm có thể trả về 1 giá trị (mặc định là undefined) và khi return sẽ thoát ra khỏi hàm.</li></ul><ul id="a9887d88-fcce-4e05-8577-aeea05e85de8" class="bulleted-list"><li style="list-style-type:disc">Tham số (bất kỳ Datatypes nào) là giá trị truyền vào hàm để thực hiện một việc gì đó</li></ul><pre id="79e14992-135c-4309-9ef7-9d358e7fd1d1" class="code"><code>function tenHam(param1, param2) {
+	//TODO
+	return //sth;
+}</code></pre><ul id="1981a9fa-b4f5-4380-be30-2e790c184c3a" class="bulleted-list"><li style="list-style-type:disc">Biến trong hàm sẽ là private, nghĩa là không truy cập được khi ra khỏi hàm (Function Scope). TUY VẬY, JS đã sửa Function Scope thành Block Scope để tránh các lỗi không mong muốn và giống với tư duy của các ngôn ngữ lập trình khác.</li></ul><p id="136eb4be-4337-4cc6-94b3-dfae55c1ce2c" class="">💡Các loại function:</p><ul id="6b186400-9a73-4795-9535-fa8398e9ae23" class="bulleted-list"><li style="list-style-type:disc">Declaration function:<pre id="53065bbe-9288-4fe3-8f88-7b376f62189c" class="code"><code>function tenHam(param1, param2) {
+	//TODO
+	return //sth;
+}</code></pre></li></ul><ul id="e3656a52-8d89-45ec-8cd9-677a362751ed" class="bulleted-list"><li style="list-style-type:disc">Expression function<pre id="44bf9b64-b934-4dcb-b8f9-2d0a57dd2c66" class="code"><code>const tenBien = function (param1, param2) {
+	//TODO
+}</code></pre></li></ul><ul id="624324c9-2552-4ac0-bb3b-d0c0be5cb309" class="bulleted-list"><li style="list-style-type:disc">Arrow function<pre id="b84b0d2a-bcca-40c6-a591-acc697c45bda" class="code"><code>const tenBien = (param1, param2) =&gt; {
+	//TODO
+}</code></pre><p id="573398c0-d693-4e45-bd82-34da01e3cab1" class="">Hoặc nếu nội dung hàm chỉ có 1 dòng thì có thể viết gọn hơn nữa:</p><pre id="3011f428-5964-416e-829f-0f45e38d671d" class="code"><code>const tenBien = (param1, param2) =&gt; //TODO;</code></pre><p id="6173d4a5-5589-46d8-97ca-5d9dd3c17a9b" class="">
+</p></li></ul><h1 id="f87d3b12-791f-4007-b42a-b5761715a75f" class="">Object</h1><pre id="5ee8b7cc-5c37-4d09-b0ba-6411448d0bd0" class="code"><code>const myInfo = {
+	name: &#x27;John&#x27;,
+	age: 25,
+	address: &#x27;New York&#x27;,
+	getName: function() {
+		return this.name;
+	}
+};</code></pre><ul id="bde1cc57-c7ed-49fb-b2d5-374bac398a23" class="bulleted-list"><li style="list-style-type:disc">Function trong Obj gọi là phương thức Method</li></ul><ul id="3ddec8e8-1863-4ac1-b761-eb530e8ee9b5" class="bulleted-list"><li style="list-style-type:disc">Những cái còn lại là thuộc tính Property</li></ul><ul id="9c9d3ef0-e392-4509-8d87-bf61fa652880" class="bulleted-list"><li style="list-style-type:disc">Truy cập thuộc tính của Object có hai cách:<ul id="83b52e01-b61c-4302-8990-0319f6063391" class="bulleted-list"><li style="list-style-type:circle">Bằng dấu ‘.’<pre id="d6aa8a24-0b05-43d0-a3f8-f558fc7c0f30" class="code"><code>myInfo.name;</code></pre></li></ul><ul id="6f5159b7-d84e-4c74-ae07-8ce276e8eb74" class="bulleted-list"><li style="list-style-type:circle">Bằng [], truyền key dưới dạng string:<pre id="9a1d080d-feaa-456c-be85-607aac18ac13" class="code"><code>myInfo[&#x27;name&#x27;];</code></pre></li></ul></li></ul><ul id="b52b960a-8c15-42d7-ae92-a493548c3dc9" class="bulleted-list"><li style="list-style-type:disc">Thêm thuộc tính cho Object:<pre id="70907ac6-47ab-4cb5-85ed-5b52b029a110" class="code"><code>myInfo.email = &#x27;test@gmail.com&#x27;;</code></pre></li></ul><ul id="713f14b6-ff4a-4923-a788-8064cd439c75" class="bulleted-list"><li style="list-style-type:disc">Lấy tất cả keys hoặc values của object<pre id="75b33816-3784-4651-b2cb-14f17cfcd463" class="code"><code>Object.keys(myObj);
+Object.values(myObj);</code></pre></li></ul><p id="58588e3d-50f5-4ab7-a99c-1f8d0eea50c6" class="">💡Object Constructor</p><pre id="7b4b32e6-0ce6-46c5-8c84-59af21de50f8" class="code"><code>function User(name, email, address) {
+	this.name = name;
+	this.email = email;
+	this.address = address;
+}
+
+let user1 = new User(&#x27;John&#x27;, &#x27;test@gmail.com&#x27;, &#x27;New York&#x27;);</code></pre><ul id="05110269-0139-4928-9feb-73d1544c38c4" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal">this</mark> đề cập đến đối tượng mà nó thuộc về (đại diện cho đối tượng sẽ được tạo)<ul id="541f505e-2796-4a8d-aa97-c0b4a6281dfe" class="bulleted-list"><li style="list-style-type:circle">Trong một phương thức, <mark class="highlight-teal">this </mark>tham chiếu tới đối tượng truy cập phương thức (đứng trước dấu ‘.’)</li></ul><ul id="f11cb69c-85af-47c9-8024-e1776e4a2f11" class="bulleted-list"><li style="list-style-type:circle">Đứng ngoài phương thức, <mark class="highlight-teal">this </mark>tham chiếu tới đối tượng global</li></ul></li></ul><h1 id="abdd7ce3-e56c-4a6e-9a98-eee1931c71b6" class="">Vòng lặp - Loop</h1><ul id="0688b586-b50c-48a6-afe3-b3d6c9b17809" class="bulleted-list"><li style="list-style-type:disc">Tránh những đoạn code lặp đi lặp lại</li></ul><ul id="9bf800fc-bf14-40ab-9ba1-312bdece9a84" class="bulleted-list"><li style="list-style-type:disc">Có 2 loại thường dùng là For và While.<ul id="2ddad3fa-2900-4d63-b4b9-51120f688c94" class="bulleted-list"><li style="list-style-type:circle">For sẽ dùng khi biết chính xác số lần lặp</li></ul></li></ul><h2 id="50352768-977e-45f0-819d-5bc14edd9ade" class="">For</h2><ul id="7b2e577a-94c6-4eae-9933-b0a39aa8849b" class="bulleted-list"><li style="list-style-type:disc">Ví dụ:</li></ul><pre id="c04711c4-c60a-489b-aa56-d0e812b29313" class="code"><code>for (let i = 0; i &lt; 100; i++) {
+	console.log(i);
+}</code></pre><ul id="d1c6fdae-ab6c-493c-b713-67ed4b686b58" class="bulleted-list"><li style="list-style-type:disc">Duyệt mảng:</li></ul><pre id="659e874d-b70e-4a76-a52d-a58276dca336" class="code"><code>const myArr = [&#x27;JS&#x27;, &#x27;Python&#x27; &#x27;C++&#x27;];
+
+for (let i = 0; i &lt; myArr.length; i++) {
+	console.log(myArr[i]);
+}</code></pre><p id="fe258bdf-56df-492d-ae2c-4cfe7810f1ad" class="">💡For - in sẽ duyệt qua key | For - of sẽ duyệt qua value</p><pre id="59c51313-27bd-4d16-b768-7451ee30ed4c" class="code"><code>// For - in
+const myInfo = {
+	name: John,
+	age: 25,
+	address: &#x27;New York&#x27;,
+	getName: function() {
+		return this.name;
+	}
+};
+
+for (let key in myInfo) {
+	console.log(key);
+}
+
+// For - of
+const myArr = [&#x27;JS&#x27;, &#x27;Python&#x27; &#x27;C++&#x27;];
+for (let value of myArr) {
+	console.log(value);
+}
+
+for (let value of Object.values(myInfo)) {
+	console.log(value);
+}</code></pre><h2 id="e1dc2eec-6e2a-4eab-8fcb-62964283de36" class="">While</h2><pre id="6f4292fe-97e1-4af8-8bc8-b44ff1d0e83c" class="code"><code>let i  = 0;
+while ( i &lt; 100) {
+	console.log(i);
+	i++;
+}</code></pre><h2 id="f3436c46-2c65-40da-823e-24fcfec4cfad" class="">Do-while</h2><pre id="5e1b95cf-202b-426b-a533-39892521a22c" class="code"><code>let i = 0;
+do {
+	i++;
+	console.log(i);
+} while(i&lt;10);</code></pre><ul id="7e247ef3-3e9f-4fcf-ad63-59c868cc7e76" class="bulleted-list"><li style="list-style-type:disc">Do-while khác While ở chỗ nó sẽ thực hiện nội dung vòng lặp trước khi kiểm tra điều kiện.</li></ul><p id="353577ec-87d6-4627-984b-bd79ada1e4b5" class="">💡Ta có thể sử dụng từ khóa <div class="indented"><ul id="324c19be-02a2-4e58-888c-2b458daf656e" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal">break: </mark>để thoát khỏi vòng lặp<mark class="highlight-teal"> </mark></li></ul><ul id="6cb2c2f2-5274-45ab-a9fd-84bb06e3b541" class="bulleted-list"><li style="list-style-type:disc"><mark class="highlight-teal">continue: </mark>để bỏ qua lần lặp này, chuyển tới lần lặp kế</li></ul></div></p><h1 id="ab83d7fa-035a-4eda-a5d0-d55630df22f3" class="">Callback</h1><ul id="d425815a-0569-4584-a46e-71ea24f433e6" class="bulleted-list"><li style="list-style-type:disc">Là hàm được truyền qua đối số</li></ul><h1 id="88616ec6-2751-4eb2-9ed5-98e9e3ca881c" class="">Array.map()</h1><ul id="496845d6-e076-4890-8893-27af5d0e86eb" class="bulleted-list"><li style="list-style-type:disc">Dùng khi muốn thay đổi, chỉnh sửa các phần tử của array</li></ul><ul id="b58147d8-3da2-4313-9bd2-c9febdb8a83b" class="bulleted-list"><li style="list-style-type:disc">Đối số truyền vào map() là 1 function</li></ul><ul id="e2957631-9569-4dbb-9b79-1d6faf9808c3" class="bulleted-list"><li style="list-style-type:disc">Hoạt động: lặp qua từng phần tử, thực hiện theo function được truyền vào</li></ul><pre id="6b3cf657-a94b-4869-b17a-e1fbfe0f3a96" class="code"><code>const array1 = [1, 4, 9, 16];
+
+// pass a function to map
+const map1 = array1.map((item, index, originalArr) =&gt; {
+  return item * 2;
+});</code></pre><pre id="bb5171f6-a5ee-42ec-8608-123621d384f3" class="code"><code>let arr = [{
+  id: 1,
+  name: &#x27;bill&#x27;
+}, {
+  id: 2,
+  name: &#x27;ted&#x27;
+}]
+
+let result = arr.map(person =&gt; ({ value: person.id, text: person.name }));
+console.log(result)</code></pre><h1 id="8dcd3c1e-8b14-4fa2-a3b6-775c278e9cba" class="">Array.filter()</h1><ul id="38f184c7-ea32-4eed-a640-8305caff3090" class="bulleted-list"><li style="list-style-type:disc">Dùng để lọc ra các phần tử thỏa điều kiện</li></ul><pre id="d14139b4-3465-4021-b56f-7c992d481f3b" class="code"><code>const words = [&#x27;spray&#x27;, &#x27;limit&#x27;, &#x27;elite&#x27;, &#x27;exuberant&#x27;, &#x27;destruction&#x27;, &#x27;present&#x27;];
+
+const result = words.filter(word =&gt; word.length &gt; 6);</code></pre><pre id="346512d5-7fa1-4e08-9479-07d8eaa1d453" class="code"><code>let json = {
+    &#x27;homes&#x27;: [{
+            &quot;home_id&quot;: &quot;1&quot;,
+            &quot;price&quot;: &quot;925&quot;,
+            &quot;sqft&quot;: &quot;1100&quot;,
+            &quot;num_of_beds&quot;: &quot;2&quot;,
+            &quot;num_of_baths&quot;: &quot;2.0&quot;,
+        }, {
+            &quot;home_id&quot;: &quot;2&quot;,
+            &quot;price&quot;: &quot;1425&quot;,
+            &quot;sqft&quot;: &quot;1900&quot;,
+            &quot;num_of_beds&quot;: &quot;4&quot;,
+            &quot;num_of_baths&quot;: &quot;2.5&quot;,
+        },
+    ]
+}
+
+const filteredHomes = json.homes.filter( item =&gt; 
+  item.price &lt;= 1000 &amp;&amp; 
+  item.sqft &gt;= 500 &amp;&amp; 
+  item.num_of_beds &gt;=2 &amp;&amp; 
+  item.num_of_baths &gt;= 2.5
+);</code></pre></div></article></body></html>
